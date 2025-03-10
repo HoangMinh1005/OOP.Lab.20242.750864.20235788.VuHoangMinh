@@ -1,0 +1,21 @@
+1. Điều gì xảy ra nếu người dùng chọn “Cancel”?
+
+Khi người dùng nhấn "Cancel":
+
+Biến option trong mã sẽ nhận giá trị là 2 (trong khi 0 nếu chọn "Yes", 1 nếu chọn "No" và -1 nếu đóng cửa sổ).
+Giá trị trả về của phương thức showConfirmDialog() được lưu vào biến option và chỉ được so sánh với JOptionPane.YES_OPTION.
+Điều này có nghĩa là:
+
+Nếu người dùng chọn "Yes", điều kiện (option == JOptionPane.YES_OPTION) sẽ đúng, và thông báo “Yes” sẽ hiển thị.
+Nếu người dùng chọn "No", "Cancel" hoặc đóng hộp thoại, điều kiện trên sẽ sai, dẫn đến hiển thị thông báo “No”.
+Tóm lại, khi người dùng chọn "Cancel" (hoặc đóng hộp thoại), giá trị trả về không khớp với JOptionPane.YES_OPTION, do đó, chương trình sẽ hiển thị kết quả như khi chọn "No".
+
+2. Làm thế nào để tùy chỉnh các nút hiển thị trong hộp thoại (ví dụ: chỉ có “Yes” và “No” hoặc đổi thành “I do” và “I don’t”)?
+
+Có thể sử dụng phương thức showOptionDialog() để thay đổi văn bản trên các nút. Phương thức này cho phép truyền vào một mảng tùy chọn, giúp điều chỉnh nội dung nút theo mong muốn, chẳng hạn thay thế "Yes" và "No" bằng "I do" và "I don’t".
+
+Ví dụ:
+JOptionPane.showOptionDialog(null,
+    "Do have an apple?", "Custom Dialog",
+    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+    null, new String[]{"I do", "I don’t"}, "I do");
