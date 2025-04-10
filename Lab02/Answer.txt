@@ -1,0 +1,40 @@
+
+Tổng hợp các kiến thức liên quan đến constructor, truyền tham số và tham chiếu trong Java
+
+1. Về constructor trùng chữ ký:
+Java không cho phép khai báo hai constructor có cùng số lượng và kiểu tham số, dù tên tham số có khác nhau. 
+Ví dụ, nếu bạn tạo một constructor nhận tham số `title` và một constructor khác nhận `category`, cả hai đều có kiểu `String` và chỉ có một tham số, Java sẽ không thể phân biệt được hai constructor này. 
+Điều này gây ra lỗi "duplicate constructor" trong quá trình biên dịch. Cụ thể, hai constructor như sau sẽ gây lỗi:
+
+DigitalVideoDisc(String title)
+DigitalVideoDisc(String category)
+
+Dù tên tham số khác nhau, Java chỉ dựa vào số lượng và kiểu tham số để phân biệt phương thức nạp chồng. Vì vậy, trong trường hợp này, Java sẽ không cho phép khai báo như vậy.
+
+2. Java là truyền tham trị hay truyền tham chiếu?
+Java là một ngôn ngữ truyền tham trị (pass-by-value), không phải truyền tham chiếu (pass-by-reference). 
+Tuy nhiên, với các đối tượng, giá trị được truyền vào phương thức thực chất là bản sao của tham chiếu đến đối tượng đó trong bộ nhớ. 
+
+3. Tại sao gọi swap(jungleDVD, cinderellaDVD) nhưng tiêu đề không đổi?
+Trong ví dụ về hoán đổi hai đối tượng DVD, phương thức swap(...) thực hiện như sau:
+
+public static void swap(DigitalVideoDisc dvd1, DigitalVideoDisc dvd2) {
+    DigitalVideoDisc temp = dvd1;
+    dvd1 = dvd2;
+    dvd2 = temp;
+}
+
+Ở đây, dvd1 và dvd2 là bản sao của tham chiếu gốc trong hàm main(). 
+Khi thực hiện hoán đổi bên trong phương thức, ta chỉ thay đổi bản sao của tham chiếu, chứ không làm thay đổi hai biến jungleDVD và cinderellaDVD trong main(). 
+Do đó, sau khi phương thức kết thúc, thứ tự và tiêu đề của hai đối tượng ban đầu vẫn không thay đổi.
+
+4. Vì sao jungleDVD thay đổi tiêu đề sau khi gọi changeTitle(...)?
+Khi gọi phương thức:
+
+changeTitle(jungleDVD, cinderellaDVD.getTitle());
+
+Biến dvd trong changeTitle() là bản sao của tham chiếu đến jungleDVD, nghĩa là cả hai cùng trỏ tới cùng một đối tượng trong bộ nhớ. 
+Khi thực hiện dvd.setTitle(title);ta thay đổi dữ liệu bên trong đối tượng mà jungleDVD đang tham chiếu tới. 
+Vì vậy, tiêu đề của jungleDVD bị thay đổi thực sự. 
+Tuy nhiên, khi sau đó gọi dvd = new DigitalVideoDisc(oldTitle); thì dvd bắt đầu trỏ đến một đối tượng mới – nhưng sự thay đổi này chỉ tồn tại bên trong phương thức, và không làm thay đổi tham chiếu gốc jungleDVD ở bên ngoài.
+- Bạn không thể thay đổi tham chiếu gốc từ trong phương thức, nhưng có thể thay đổi trạng thái của đối tượng mà tham chiếu trỏ đến.
