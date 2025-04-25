@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class GarbageCreator {
     public static void main(String[] args) throws IOException {
-        String filename = "test.txt";
+        String filename = "OtherProject/test.txt";
         byte[] inputBytes = { 0 };
         long startTime, endTime;
     
