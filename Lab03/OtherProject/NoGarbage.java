@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class NoGarbage {
     public static void main(String[] args) throws IOException {
-        String filename = "binary.txt";
+        String filename = "OtherProject/binary.txt";
         byte[] inputBytes = { 0 };
         long startTime, endTime;
     
