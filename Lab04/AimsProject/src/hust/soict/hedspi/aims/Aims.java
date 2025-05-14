@@ -10,6 +10,7 @@ import AimsProject.src.hust.soict.hedspi.aims.disc.CompactDisc;
 import AimsProject.src.hust.soict.hedspi.aims.disc.DigitalVideoDisc;
 import AimsProject.src.hust.soict.hedspi.aims.disc.Track;
 import AimsProject.src.hust.soict.hedspi.aims.media.Media;
+import AimsProject.src.hust.soict.hedspi.aims.screen.manager.StoreManagerScreen;
 import AimsProject.src.hust.soict.hedspi.aims.store.Store;
 
 public class Aims {
@@ -19,6 +20,7 @@ public class Aims {
 
     public static void main(String[] args) {
         loadExample();
+        new StoreManagerScreen(store);
         showMenu();
     }
 
@@ -30,7 +32,7 @@ public class Aims {
         store.addMedia(new DigitalVideoDisc(5, "Cars", "Animation", 21.00f, 117, "John Lasseter"));
 
         store.addMedia(new CompactDisc(6, "Thriller", "Music", 74.3f, 42, "Quincy Jones", "Michael Jackson"));
-        store.addMedia(new CompactDisc(7, "Bad", "Music", 60.5f, 48, "Quincy Jones", "Michael Jackson"));
+        /*store.addMedia(new CompactDisc(7, "Bad", "Music", 60.5f, 48, "Quincy Jones", "Michael Jackson"));
         store.addMedia(new CompactDisc(8, "Thriller 25", "Music", 75.0f, 45, "Quincy Jones", "Michael Jackson"));
         store.addMedia(new CompactDisc(9, "Dangerous", "Music", 77.0f, 50, "Teddy Riley", "Michael Jackson"));
         store.addMedia(new CompactDisc(10, "History", "Music", 76.0f, 49, "Michael Jackson", "Michael Jackson"));
@@ -68,7 +70,7 @@ public class Aims {
 
         store.addMedia(adeleCD);
         store.addMedia(edSheeranCD);
-        store.addMedia(thrillerCD);
+        store.addMedia(thrillerCD);*/
     }
 
     public static void showMenu() {
@@ -301,6 +303,7 @@ public class Aims {
 
         System.out.print("ID: ");
         int id = inp.nextInt();
+        inp.nextLine();
         System.out.print("Title: ");
         String title = inp.nextLine();
         System.out.print("Category: ");
