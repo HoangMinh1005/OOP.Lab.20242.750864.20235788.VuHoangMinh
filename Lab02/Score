@@ -1,0 +1,2 @@
+Score: 9
+Comments: Mối quan hệ include của searchDVD, sortDVD sai, mối quan hệ giữa DVD và Cart em đang dùng sai (kết tập không phải kế thừa)
