@@ -1,0 +1,10 @@
+ANSWERS
+Student: Tran Huy Hoang
+Id: 20235939
+
+
+11 Update the Aims class
+- The Aims class must be updated to handle any exceptions generated when the play() methods
+are called. What happens when you don’t update for them to catch?
+
+The Aims class must be updated to handle any exceptions generated when the play() methods are called because the play() method in the Playable interface is declared with throws PlayerException. This makes PlayerException a checked exception, and Java requires all checked exceptions to be either caught using a try-catch block or declared with throws in the method signature

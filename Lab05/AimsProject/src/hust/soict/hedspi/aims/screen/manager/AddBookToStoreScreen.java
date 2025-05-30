@@ -1,61 +1,34 @@
 package AimsProject.src.hust.soict.hedspi.aims.screen.manager;
 
-import javax.swing.*;
-
-import AimsProject.src.hust.soict.hedspi.aims.book.Book;
+import AimsProject.src.hust.soict.hedspi.aims.media.Book;
 import AimsProject.src.hust.soict.hedspi.aims.store.Store;
-
+import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class AddBookToStoreScreen extends AddItemToStoreScreen {
+    private JTextField tfAuthors;
     public AddBookToStoreScreen(Store store) {
         super(store);
-        add(createCenter(), BorderLayout.CENTER);
+        JPanel center = createCenter();
+        center.add(new JLabel("Authors:"));
+        tfAuthors = new JTextField(20);
+        center.add(tfAuthors);
+        getContentPane().add(center, BorderLayout.CENTER);
+        setTitle("Add Book");
     }
-
     @Override
-    protected JPanel createCenter() {
-        JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
-
-        JTextField idField = new JTextField();
-        JTextField titleField = new JTextField();
-        JTextField categoryField = new JTextField();
-        JTextField costField = new JTextField();
-        JTextField authorsField = new JTextField();
-
-        panel.add(new JLabel("ID:"));
-        panel.add(idField);
-        panel.add(new JLabel("Title:"));
-        panel.add(titleField);
-        panel.add(new JLabel("Category:"));
-        panel.add(categoryField);
-        panel.add(new JLabel("Cost:"));
-        panel.add(costField);
-        panel.add(new JLabel("Authors (comma-separated):"));
-        panel.add(authorsField);
-
-        JButton addButton = new JButton("Add Book");
-        addButton.addActionListener(e -> {
-                int id = Integer.parseInt(idField.getText());
-                String title = titleField.getText();
-                String category = categoryField.getText();
-                float cost = Float.parseFloat(costField.getText());
-                String[] authorNames = authorsField.getText().split(",");
-                ArrayList<String> authors = new ArrayList<>();
-                for (String name : authorNames) {
-                    authors.add(name.trim());
-                }
-
-                store.addMedia(new Book(id, title, category, cost, authors));
-                JOptionPane.showMessageDialog(this, "Book added successfully!");
-        });
-
-        panel.add(new JLabel());
-        panel.add(addButton);
-
-        return panel;
+    void addMedia() {
+        String title = tfTitle.getText();
+        String category = tfCategory.getText();
+        float cost = Float.parseFloat(tfCost.getText());
+        String authors = tfAuthors.getText();
+        Book book = new Book(store.getItemsInStore().size() + 1, title, category, cost);
+        for (String author : authors.split(",")) {
+            book.addAuthor(author.trim());
+        }
+        store.addMedia(book);
+        JOptionPane.showMessageDialog(this, "Book added successfully!");
+        dispose();
+        new StoreManagerScreen(store);
     }
-
 }
-

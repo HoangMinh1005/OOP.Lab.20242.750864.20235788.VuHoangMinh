@@ -1,61 +1,38 @@
 package AimsProject.src.hust.soict.hedspi.aims.screen.manager;
 
-
-
-import javax.swing.*;
-
-import AimsProject.src.hust.soict.hedspi.aims.disc.DigitalVideoDisc;
+import AimsProject.src.hust.soict.hedspi.aims.media.DigitalVideoDisc;
 import AimsProject.src.hust.soict.hedspi.aims.store.Store;
 
+import javax.swing.*;
 import java.awt.*;
 
-
 public class AddDigitalVideoDiscToStoreScreen extends AddItemToStoreScreen {
+    private JTextField tfDirector, tfLength;
+
     public AddDigitalVideoDiscToStoreScreen(Store store) {
         super(store);
-        add(createCenter(), BorderLayout.CENTER);
+        JPanel center = createCenter();
+        center.add(new JLabel("Director:"));
+        tfDirector = new JTextField(20);
+        center.add(tfDirector);
+        center.add(new JLabel("Length:"));
+        tfLength = new JTextField(20);
+        center.add(tfLength);
+        getContentPane().add(center, BorderLayout.CENTER);
+        setTitle("Add DVD");
     }
 
     @Override
-    protected JPanel createCenter() {
-        JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
-
-        JTextField idField = new JTextField();
-        JTextField titleField = new JTextField();
-        JTextField categoryField = new JTextField();
-        JTextField costField = new JTextField();
-        JTextField lengthField = new JTextField();
-        JTextField directorField = new JTextField();
-
-        panel.add(new JLabel("ID:"));
-        panel.add(idField);
-        panel.add(new JLabel("Title:"));
-        panel.add(titleField);
-        panel.add(new JLabel("Category:"));
-        panel.add(categoryField);
-        panel.add(new JLabel("Cost:"));
-        panel.add(costField);
-        panel.add(new JLabel("Length:"));
-        panel.add(lengthField);
-        panel.add(new JLabel("Director:"));
-        panel.add(directorField);
-
-        JButton addButton = new JButton("Add DVD");
-        addButton.addActionListener(e -> {
-            int id = Integer.parseInt(idField.getText());
-            String title = titleField.getText();
-            String category = categoryField.getText();
-            float cost = Float.parseFloat(costField.getText());
-            int length = Integer.parseInt(lengthField.getText());
-            String director = directorField.getText();
-
-            store.addMedia(new DigitalVideoDisc(id, title, category, cost, length, director));
-            JOptionPane.showMessageDialog(this, "DVD added successfully!");
-        });
-
-        panel.add(new JLabel());
-        panel.add(addButton);
-
-        return panel;
+    void addMedia() {
+        String title = tfTitle.getText();
+        String category = tfCategory.getText();
+        float cost = Float.parseFloat(tfCost.getText());
+        String director = tfDirector.getText();
+        int length = Integer.parseInt(tfLength.getText());
+        DigitalVideoDisc dvd = new DigitalVideoDisc(store.getItemsInStore().size() + 1, title, category, cost, director, length);
+        store.addMedia(dvd);
+        JOptionPane.showMessageDialog(this, "DVD added successfully!");
+        dispose();
+        new StoreManagerScreen(store);
     }
 }

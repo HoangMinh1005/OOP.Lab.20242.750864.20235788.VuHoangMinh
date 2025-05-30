@@ -1,55 +1,29 @@
 package AimsProject.src.hust.soict.hedspi.aims.store;
 
+import AimsProject.src.hust.soict.hedspi.aims.media.Media;
 import java.util.ArrayList;
 
-import AimsProject.src.hust.soict.hedspi.aims.media.Media;
-
 public class Store {
-    private ArrayList<Media> itemsInStore = new ArrayList<Media>();
+	private ArrayList<Media> itemsInStore = new ArrayList<>();
+	
+	public ArrayList<Media> getItemsInStore() {
+		return itemsInStore;
+	}
 
-    public Media getMedia(String title) {
-        for (Media media : itemsInStore) {
-            if (media.getTitle().equals(title)) {
-                return media;
-            }
-        }
-        return null;
+	public void setItemsInStore(ArrayList<Media> itemsInStore) {
+		this.itemsInStore = itemsInStore;
+	}
+
+	public void addMedia(Media media) {
+        itemsInStore.add(media);
+        System.out.println("Media added to store: " + media.getTitle());
     }
 
-    public void addMedia(Media item) {
-        if (!itemsInStore.contains(item)) {
-            itemsInStore.add(item);
-            System.out.println("The item has been added");
+    public void removeMedia(Media media) {
+    	if (itemsInStore.remove(media)) {
+            System.out.println("Media removed from store: " + media.getTitle());
         } else {
-            System.out.println("The item existed");
+            System.out.println("Media not found in store");
         }
     }
-
-    public void removeMedia(Media item){
-        if(!itemsInStore.isEmpty()){
-            if(itemsInStore.contains(item)){
-                itemsInStore.remove(item);
-                System.out.println("The item has been removed");
-            }
-            System.out.println("The item is not in the cart");
-        }
-        else {
-            System.out.println("The cart is empty");
-        }
-    }
-
-    public void removeMedia (String title) {
-        itemsInStore.remove(getMedia(title));
-    }
-
-    public void print() {
-        System.out.println("Items in store: ");
-        for (Media media : itemsInStore) {
-            System.out.println(media.toString());
-        }
-    }
-    public ArrayList<Media> getItemsInStore() {
-        return itemsInStore;
-    }
-
 }
